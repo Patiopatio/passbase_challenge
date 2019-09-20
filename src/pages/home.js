@@ -31,3 +31,18 @@ const weatherResponse = {
     name: "Berlin",
     cod: 200
 };
+
+
+export default () => {
+    const [city, setCity] = useState("")
+
+
+
+
+
+    const onSubmit = (event, cityInput) => {
+        event.preventDefault()
+        setCity(cityInput)
+    }
+
+}
