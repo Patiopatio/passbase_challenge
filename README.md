@@ -8,11 +8,11 @@ From the root directory:
 
 ### Setup
 
-npm install
+```npm install```
 
 ### Run
 
-npm start
+```npm start```
 
 ## Dependencies
 

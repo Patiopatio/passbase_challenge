@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
+import Switch from "react-switch";
 import { WiCloud } from "react-icons/wi";
 import Form from '../components/form/form'
 import WeatherDetails from '../components/weather/weather-details'
 import "./home.sass";
+
 
 // const weatherResponse = {
 //     coord: { lon: 13.39, lat: 52.52 },
@@ -73,7 +75,7 @@ export default () => {
     const _map = response => {
         return {
             time: _mapTime(response.dt),
-            temperature: _mapTemperature(response.main.temp),
+            temperature: response.main.temp,
             condition: response.weather[0].description
         }
        
@@ -84,9 +86,16 @@ export default () => {
         return time.getHours() + ":" + time.getMinutes()
     }
 
-    const _mapTemperature = (temp) => {
-        return temp
+    const _mapTemperature = (temp, isMetric) => {
+        return isMetric ? weather.temperature : _transformIntoFahrenheit(weather.temperature)
     }
+
+    const _transformIntoFahrenheit = (temp) => {
+        const transformed = (temp * 9) / 5 + 32;  
+        // get only last two digits
+        // see https://stackoverflow.com/questions/6134039/format-number-to-always-show-2-decimal-places
+        return parseFloat(Math.round(transformed * 100) / 100).toFixed(2);
+    } 
 
 
     return (
@@ -102,7 +111,7 @@ export default () => {
                     <WeatherDetails
                     time={weather.time} 
                     temperature={
-                        isMetric ? weather.temperature : (weather.temperature * 9) / 5 + 32
+                        _mapTemperature(weather.temperature, isMetric)
                     }
                     unit={isMetric ? "°C" : "°F"}
                     condition={weather.condition}
@@ -113,7 +122,15 @@ export default () => {
         }
         <div id="weather-form">
             <div id="wrapper">
-                <h2>Find a Forecast</h2>
+                <h2>Find a Forecast</h2><div id="switch-wrapper">
+            <span>{isMetric ? "Metric" : "Imperial"}</span>
+            <Switch
+              onChange={isChecked => setIsMetric(isChecked)}
+              checked={isMetric}
+              uncheckedIcon={false}
+              checkedIcon={false}
+            />
+          </div>
             </div>
             <Form onSubmit={onSubmit} />
         </div>
