@@ -1,7 +1,5 @@
 import React from 'react';
-import './App.css';
-import { Link } from "react"
-import Location from "./pages/location"
+import './App.sass';
 import Home from "./pages/home"
 
 function App() {
