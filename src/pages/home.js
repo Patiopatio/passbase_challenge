@@ -41,7 +41,7 @@ export default () => {
     const [isErrorDisplay, setIsErrorDisplay] = useState(false);
 
     const _getWeatherByCity = city => {
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=360f5bc55ffe43108eb3bf16a385bf75&units=metric`
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=360f5bc55ffe43108eb3bf16a385bf75&units=metric`
         return axios
             .get(url)
             .then(response => {
