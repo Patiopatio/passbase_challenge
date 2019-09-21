@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "./form.sass";
 
 
 export default ({ onSubmit }) => {

@@ -1,5 +1,4 @@
 import React from "react";
-import "./weather-details.sass";
 
 export default ({ time, temperature, unit, condition }) => {
   return (
