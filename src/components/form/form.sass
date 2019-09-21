@@ -1,0 +1,27 @@
+// TODO in extra file _variables.sass
+$color : #003827
+
+form
+    display: grid
+    grid-template-columns: 1fr auto
+    grid-gap: 5px
+    border-radius: .25rem
+
+    @media screen and (max-width:320px)
+        grid-template-columns: 1fr
+
+button
+    background: #003827
+    color: white
+    padding:
+    border: 1px solid $color!important
+    cursor: pointer
+    padding: 0 30px !important
+
+.form-control
+    padding: .375rem .75rem
+    font-size: 1rem
+    line-height: 1.5
+    border: 1px solid #ced4da
+    border-radius: .25rem
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
