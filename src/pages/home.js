@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import axios from "axios";
 import Form from '../components/form/form'
 import WeatherDetails from '../components/weather/weather-details'
 
@@ -31,19 +32,32 @@ const weatherResponse = {
     name: "Berlin",
     cod: 200
 };
-// const home = () => {
-// export default () => {
 export default () => {
     const [weather, setWeather] = useState({});
     const [city, setCity] = useState("")
     const [isMetric, setIsMetric] = useState(true)
+    const [isLoading, setIsLoading] = useState(false);
+    const [isErrrorDisplay, setIsDisplayError] = useState(false);
 
 useEffect(() => {
-    var mappedWeather = _map(weatherResponse)
-    
-    setWeather(mappedWeather)
-}, [])
+    const fetchData = async () => {
+        setIsLoading(true)
+        const weatherResponse = await _getWeatherByCity(city)
+        setWeather(weatherResponse)
+        setIsLoading(false)
+    }
+    if (city) fetchData();
+}, [city])
 
+const _getWeatherByCity = city => {
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=360f5bc55ffe43108eb3bf16a385bf75&units=metric`
+    return axios
+        .get(url)
+        .then(response => {
+            setIsDisplayError(false);
+            return _map (response.data)
+    })
+}
 
     const onSubmit = (event, cityInput) => {
         event.preventDefault()
