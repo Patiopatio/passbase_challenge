@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from "axios";
+import { WiCloud } from "react-icons/wi";
 import Form from '../components/form/form'
 import WeatherDetails from '../components/weather/weather-details'
 import "./home.sass";
@@ -97,6 +98,7 @@ export default () => {
             weather && !isErrorDisplay ? (
                 <div>
                     <h1>Weather forecast for {city}</h1>
+                    <WiCloud size={200} />
                     <WeatherDetails
                     time={weather.time} 
                     temperature={
